@@ -8,13 +8,13 @@ function handleSubmit(event) {
         let form = new URLSearchParams();
         form.append("url", formText);
 
-        const response = fetch('http://localhost:8081/sentiment', {
+        const response = fetch('http://localhost:8081/summarization', {
             method: "POST",
             body: form
         })
-        .then((response) => response.text())
+        .then((response) => response.json())
         .then((data) => {
-            resultsSection.innerHTML = data;
+            resultsSection.innerHTML = data.summary;
         })
         .catch(err => {
             console.error(err);

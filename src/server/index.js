@@ -25,12 +25,13 @@ app.get('/test', function (req, res) {
     res.send(mockAPIResponse)
 })
 
-app.post('/sentiment', upload.none() ,async (req,res, next) => {
+app.post('/summarization', upload.none() ,async (req,res,next) => {
     const form = new URLSearchParams();
     form.append("key", process.env.MEAN_API_KEY);
     form.append("url", req.body.url);
+    form.append("sentences", 2);
 
-    const response = await fetch("https://api.meaningcloud.com/sentiment-2.1", {
+    const response = await fetch("https://api.meaningcloud.com/summarization-1.0", {
         method: "POST",
         body: form
     })
