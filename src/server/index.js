@@ -46,6 +46,22 @@ app.post('/summarization', upload.none() ,async (req, res, next) => {
     }
 })
 
+app.post('/sentiment', upload.none(), async (req, res, next) => {
+    const form = new URLSearchParams();
+    form.append("key", process.env.MEAN_API_KEY);
+    form.append("url", req.body.url);
+
+    const response = await fetch("https://api.meaningcloud.com/sentiment-2.1", {
+        method: "POST",
+        body: form
+    })
+    .then(response => response.json())
+    .then((data)=> {
+        console.log(data);
+    })
+    .catch(err => console.log(err))
+})
+
 app.get('/server-status', (req, res) => {
     res.status(200).send({status: 200, message: "server is online"});
 })
