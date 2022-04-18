@@ -1,13 +1,17 @@
-const path = require('path')
-const webpack = require('webpack')
-const HtmlWebPackPlugin = require("html-webpack-plugin")
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+import path from 'path';
+import webpack from 'webpack';
+import HtmlWebPackPlugin from 'html-webpack-plugin';
+import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 
-module.exports = {
+export default {
     entry: './src/client/index.js',
     mode: 'development',
     devtool: 'source-map',
     stats: 'verbose',
+    output: {
+        libraryTarget: 'var',
+        library: 'Client'
+    },
     module: {
         rules: [
             {

@@ -1,29 +1,51 @@
-const dotenv = require('dotenv').config()
-var aylien = require("aylien_textapi");
-var path = require('path')
-const express = require('express')
-const mockAPIResponse = require('./mockAPI.js')
-
-var aylienapi = new aylien({
-    application_id: process.env.API_ID,
-    application_key: process.env.API_KEY
-});
+import 'dotenv/config';
+import path from 'path';
+import express from 'express';
+import fetch from 'node-fetch';
+import cors from 'cors';
+import bodyParser from 'body-parser';
+import multer from 'multer';
+import FormData from 'form-data';
+//const mockAPIResponse = require('./mockAPI.js');
 
 const app = express()
+const port = 8081
+const upload = multer()
 
 app.use(express.static('dist'))
-
-console.log(__dirname)
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
+app.use(cors());
 
 app.get('/', function (req, res) {
     res.sendFile('dist/index.html')
 })
 
-// designates what port the app will listen to for incoming requests
-app.listen(8080, function () {
-    console.log('Example app listening on port 8080!')
-})
-
 app.get('/test', function (req, res) {
     res.send(mockAPIResponse)
+})
+
+app.post('/sentiment', upload.none() ,async (req,res, next) => {
+    const form = new URLSearchParams();
+    form.append("key", process.env.MEAN_API_KEY);
+    form.append("url", req.body.url);
+
+    const response = await fetch("https://api.meaningcloud.com/sentiment-2.1", {
+        method: "POST",
+        body: form
+    })
+    .then(response => response.json())
+    .catch(err => console.log(err))
+
+    try {
+        const result = await response;
+        res.status(200).send(result);
+    } catch {
+        res.status(500).send({ message: "Failed to process data" })
+    }
+})
+
+// designates what port the app will listen to for incoming requests
+app.listen(port, function () {
+    console.log('Example app listening on port 8080!')
 })

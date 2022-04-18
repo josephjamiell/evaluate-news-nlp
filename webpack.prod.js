@@ -1,10 +1,14 @@
-const path = require('path')
-const webpack = require('webpack')
-const HtmlWebPackPlugin = require("html-webpack-plugin")
+import path from 'path';
+import webpack from 'webpack';
+import HtmlWebPackPlugin from 'html-webpack-plugin';
 
-module.exports = {
+export default {
     entry: './src/client/index.js',
     mode: 'production',
+    output: {
+        libraryTarget: 'var',
+        library: 'Client'
+    },
     module: {
         rules: [
             {
