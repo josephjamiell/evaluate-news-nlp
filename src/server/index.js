@@ -47,5 +47,5 @@ app.post('/sentiment', upload.none() ,async (req,res, next) => {
 
 // designates what port the app will listen to for incoming requests
 app.listen(port, function () {
-    console.log('Example app listening on port 8080!')
+    console.log(`Example app listening on port ${port}!`)
 })

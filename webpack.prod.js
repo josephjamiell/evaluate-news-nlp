@@ -1,6 +1,7 @@
 import path from 'path';
 import webpack from 'webpack';
 import HtmlWebPackPlugin from 'html-webpack-plugin';
+import WorkboxPlugin from 'workbox-webpack-plugin';
 
 export default {
     entry: './src/client/index.js',
@@ -26,6 +27,7 @@ export default {
         new HtmlWebPackPlugin({
             template: "./src/client/views/index.html",
             filename: "./index.html",
-        })
+        }),
+        new WorkboxPlugin.GenerateSW()
     ]
 }

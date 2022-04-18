@@ -8,7 +8,7 @@
 
         <header>
             <div class="">
-                Logo
+                Natural Language Processing
             </div>
             <div class="">
                 navigation
@@ -18,7 +18,7 @@
         <main>
             <section>
                 <form class="" onsubmit="return Client.handleSubmit(event)">
-                    <input id="url" type="text" name="url" value="" placeholder="please enter desired article url">
+                    <input id="url" type="text" name="url" value="" placeholder="Please enter a valid article url">
                     <input type="submit" name="" value="submit" onclick="return Client.handleSubmit(event)" onsubmit="return Client.handleSubmit(event)">
                 </form>
             </section>
@@ -30,8 +30,15 @@
         </main>
 
         <footer>
-            <p>This is a footer</p>
+            <p>Powered By MeaningCloud API</p>
         </footer>
 
+        <script>
+            if ('serviceWorker' in navigator) {
+                window.addEventListener('load', () => {
+                    navigator.serviceWorker.register('/service-worker.js');
+                });
+            }
+        </script>
     </body>
 </html>
