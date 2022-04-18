@@ -1,4 +1,10 @@
-function checkForUrl(inputText) {
+const checkForUrl = (inputText) => {
+
+    if(inputText === null) {
+        console.log("Input can not be null")
+        return false
+    }
+
     console.log("::: Running checkForUrl:::", inputText);
 
     function isValidURL(string) {
@@ -8,8 +14,8 @@ function checkForUrl(inputText) {
 
     if(isValidURL(inputText)) {
         return true;
-    } else {
-        alert("Please enter a valid url");
+    } else  {
+        console.log("Please enter a valid url")
         return false;
     }
 }

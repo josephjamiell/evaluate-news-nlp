@@ -1,10 +1,11 @@
-function handleSubmit(event) {
+const handleSubmit = (event) => {
     event.preventDefault()
 
     const resultsSection = document.getElementById('results');
     // check what text was put into the form field
     let formText = document.getElementById('url').value
     if(Client.checkForUrl(formText)) {
+        resultsSection.innerHTML = "Loading...";
         let form = new URLSearchParams();
         form.append("url", formText);
 
@@ -22,10 +23,7 @@ function handleSubmit(event) {
         })
 
         console.log("::: Form Submitted :::")
-     }
-
-
-    
+     } 
 }
 
 export { handleSubmit }

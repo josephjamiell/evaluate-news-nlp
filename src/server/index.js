@@ -25,7 +25,7 @@ app.get('/test', function (req, res) {
     res.send(mockAPIResponse)
 })
 
-app.post('/summarization', upload.none() ,async (req,res,next) => {
+app.post('/summarization', upload.none() ,async (req, res, next) => {
     const form = new URLSearchParams();
     form.append("key", process.env.MEAN_API_KEY);
     form.append("url", req.body.url);
@@ -44,6 +44,10 @@ app.post('/summarization', upload.none() ,async (req,res,next) => {
     } catch {
         res.status(500).send({ message: "Failed to process data" })
     }
+})
+
+app.get('/server-status', (req, res) => {
+    res.status(200).send({status: 200, message: "server is online"});
 })
 
 // designates what port the app will listen to for incoming requests
