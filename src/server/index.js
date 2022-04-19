@@ -25,7 +25,7 @@ app.get('/test', function (req, res) {
     res.send(mockAPIResponse)
 })
 
-app.post('/summarization', upload.none() ,async (req, res, next) => {
+app.post('/summarization', upload.none(), async (req, res, next) => {
     const form = new URLSearchParams();
     form.append("key", process.env.MEAN_API_KEY);
     form.append("url", req.body.url);
@@ -42,7 +42,7 @@ app.post('/summarization', upload.none() ,async (req, res, next) => {
         const result = await response;
         res.status(200).send(result);
     } catch {
-        res.status(500).send({ message: "Failed to process data" })
+        res.status(500).send({ message: "Failed to process summarization data" })
     }
 })
 
@@ -55,11 +55,15 @@ app.post('/sentiment', upload.none(), async (req, res, next) => {
         method: "POST",
         body: form
     })
-    .then(response => response.json())
-    .then((data)=> {
-        console.log(data);
-    })
+    .then((response) => response.json())
     .catch(err => console.log(err))
+
+    try {
+        const result = await response;
+        res.status(200).send(result);
+    } catch {
+        res.status(500).send({ message: "Failed to process sentiment data" })
+    }
 })
 
 app.get('/server-status', (req, res) => {

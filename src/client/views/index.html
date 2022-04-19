@@ -17,6 +17,11 @@
                 <h2>News Article Summarization</h2><br>
                 <form class="" onsubmit="return Client.handleSubmit(event)">
                     <input id="url" type="text" name="url" value="" placeholder="Please enter a valid article url">
+                    <label for="analysis-type">Choose a text analysis type:</label>
+                    <select id="analysis-type" name="analysis-type">
+                        <option value="sentiment" selected>Sentiment</option>
+                        <option value="summarization">Summarization</option>
+                    </select>
                     <input type="submit" name="" value="submit" onclick="return Client.handleSubmit(event)" onsubmit="return Client.handleSubmit(event)">
                 </form>
             </section>
